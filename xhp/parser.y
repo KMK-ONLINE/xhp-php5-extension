@@ -756,12 +756,21 @@ optional_class_type:
 | T_ARRAY {
     $$ = $1 + " ";
   }
+| '?' fully_qualified_class_name {
+    $$ = $1 + $2 + " ";
+  }
+| '?' T_ARRAY {
+    $$ = $1 + $2 + " ";
+  }
 ;
 
 type:
   T_ARRAY	{ $$ = $1; }
 | T_CALLABLE	{ $$ = $1; }
 | fully_qualified_class_name		{ $$ = $1; }
+| '?' T_ARRAY	{ $$ = $1 + $2; }
+| '?' T_CALLABLE	{ $$ = $1 + $2; }
+| '?' fully_qualified_class_name		{ $$ = $1 + $2; }
 ;
 
 return_type:
